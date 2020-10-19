@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "Handlebars helpers by GSD",
   "main": "gsd-handlebars-helpers.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [
     "nodejs",
     "handlebars",
     "handlebars-helpers"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GSoftwareDevelopment/gsd-handlebars-helpers"
+  },
   "author": "GSD",
   "license": "MIT",
   "devDependencies": {
