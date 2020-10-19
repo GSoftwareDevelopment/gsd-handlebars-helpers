@@ -219,4 +219,12 @@ Jako argument może być podana również nazwa licznika. W tym celu nazwa musi 
 
 ### `isEven | isOdd {arg}`
 
-Funkcje sprawdzające parzystość argumentu `arg`.
+Obie funkcje służą do sprawdzenia, czy podana wartość `arg` jest parzysta (`isEven`) czy nieparzysta (`isOdd`). Zwracana wartość jest typem boolean.
+
+### `limitMin | limitMax {arg} {limit}`
+
+Funkcja limitująca wartość podaną w argumencie `arg` do wartości podanej w `limit`
+`limitMin` ogranicza wartość w dół, tzn. jeżeli wartość `arg` jest mniejsza niż `limit` to funkcja zwraca `limit`. W przeciwnym wypadku, zwracaa jest wartość `arg`
+`limitMax` dogranicza wartość w górę, tzn. jeżeli wartość `arg` jest większa niż `limit` to funcka zwraca `limit`.
+
+**Funkcja zwraca wartość!**

@@ -235,4 +235,14 @@ The name of the counter may also be given as an argument. For this, the name mus
 
 ### `isEven | isOdd {arg}`
 
+Both functions are used to check whether the given value of `arg` is even (`isEven`) or odd (`isOdd`). The return value is a boolean type.
+
+### `limitMin | limitMax {arg} {limit}`
+
 Functions that check the parity of the `arg` argument.
+
+Function that limits the value specified in the argument `arg` to the value specified in `limit`
+`limitMin` limits the value downwards, ie if the value of `arg` is less than `limit` then the function returns `limit`. Otherwise, ʻarg` is returned
+`limitMax` truncates the value upwards, ie if the value of `arg` is greater than `limit`, the function returns `limit`.
+
+**The function returns a value!**
