@@ -1,4 +1,5 @@
 const Handlebars = require( 'handlebars/runtime' );
+const { formatTime, formatDate } = require( './../class/misc' );
 
 // Conditional
 
@@ -40,7 +41,10 @@ Handlebars.registerHelper( 'loop', function ( from, to, opt ) {
     let accum = '',
         data = {};
 
-    for ( let i = from; i < to; i++ ) {
+    from = getOp( from, 'Invalid "from" operand' );
+    to = getOp( to, 'Invalid "to" operand' );
+
+    for ( let i = from; i <= to; i++ ) {
         data.index = i;
         data.first = ( i === from );
         data.last = ( i === to );
@@ -56,7 +60,8 @@ function getOp ( op, errMsg ) {
         return counters[ op ]
     else if ( typeof op === 'number' )
         return op
-    else throw errMsg;
+    else
+        throw new Error( errMsg );
 }
 
 Handlebars.registerHelper( 'add', function ( a, b ) {
@@ -81,11 +86,25 @@ Handlebars.registerHelper( 'div', function ( a, b ) {
 } );
 
 Handlebars.registerHelper( 'isEven', function ( a ) {
-    return ( a % 2 == 0 );
+    let opA = getOp( a, 'Invalid operand' );
+    return ( opA % 2 == 0 );
 } );
 
 Handlebars.registerHelper( 'isOdd', function ( a ) {
-    return ( a % 2 == 1 );
+    let opA = getOp( a, 'Invalid operand' );
+    return ( opA % 2 == 1 );
+} );
+
+Handlebars.registerHelper( 'limitMin', function ( a, limit ) {
+    a = getOp( a, 'Invalid first operand' )
+    limit = getOp( limit, 'Invalit limit operand' )
+    return ( a < limit ? a = limit : a );
+} );
+
+Handlebars.registerHelper( 'limitMax', function ( a, limit ) {
+    a = getOp( a, 'Invalid first operand' )
+    limit = getOp( limit, 'Invalit limit operand' )
+    return ( a > limit ? a = limit : a );
 } );
 
 module.exports = Handlebars;
