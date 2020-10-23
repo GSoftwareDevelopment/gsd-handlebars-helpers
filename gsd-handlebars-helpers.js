@@ -1,6 +1,19 @@
 const Handlebars = require( 'handlebars/runtime' );
 const { formatTime, formatDate } = require( './../class/misc' );
 
+var counters = {};
+
+//
+
+function getOp ( op, errMsg ) {
+    if ( typeof op === 'string' )
+        return counters[ op ]
+    else if ( typeof op === 'number' )
+        return op
+    else
+        throw new Error( errMsg );
+}
+
 // Conditional
 
 Handlebars.registerHelper( 'eq', function ( a, b ) { return ( a == b ); } );
@@ -26,14 +39,12 @@ Handlebars.registerHelper( 'isObject', function ( a ) { return ( typeof a === "o
 
 // Counters
 
-var counters = {};
-
 Handlebars.registerHelper( 'set', function ( name, value ) { counters[ name ] = value; } );
 Handlebars.registerHelper( 'get', function ( name ) { return counters[ name ]; } );
-Handlebars.registerHelper( 'zero', function ( name ) { counter[ name ] = 0; } );
-Handlebars.registerHelper( 'inc', function ( name ) { counter[ name ]++; } );
-Handlebars.registerHelper( 'dec', function ( name ) { counter[ name ]--; } );
-Handlebars.registerHelper( 'isZero', function ( name ) { return counter[ name ] === 0; } );
+Handlebars.registerHelper( 'zero', function ( name ) { counters[ name ] = 0; } );
+Handlebars.registerHelper( 'inc', function ( name ) { counters[ name ]++; } );
+Handlebars.registerHelper( 'dec', function ( name ) { counters[ name ]--; } );
+Handlebars.registerHelper( 'isZero', function ( name ) { return counters[ name ] === 0; } );
 
 // Iterations
 
@@ -54,15 +65,6 @@ Handlebars.registerHelper( 'loop', function ( from, to, opt ) {
 } );
 
 // Math
-
-function getOp ( op, errMsg ) {
-    if ( typeof op === 'string' )
-        return counters[ op ]
-    else if ( typeof op === 'number' )
-        return op
-    else
-        throw new Error( errMsg );
-}
 
 Handlebars.registerHelper( 'add', function ( a, b ) {
     let opA = getOp( a, 'Invalid left operand' );
@@ -86,13 +88,11 @@ Handlebars.registerHelper( 'div', function ( a, b ) {
 } );
 
 Handlebars.registerHelper( 'isEven', function ( a ) {
-    let opA = getOp( a, 'Invalid operand' );
-    return ( opA % 2 == 0 );
+    return ( a % 2 == 0 );
 } );
 
 Handlebars.registerHelper( 'isOdd', function ( a ) {
-    let opA = getOp( a, 'Invalid operand' );
-    return ( opA % 2 == 1 );
+    return ( a % 2 == 1 );
 } );
 
 Handlebars.registerHelper( 'limitMin', function ( a, limit ) {
